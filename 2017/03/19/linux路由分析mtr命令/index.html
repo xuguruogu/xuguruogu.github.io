@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -87,19 +87,22 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="在Linux中有一个更好的网络连通性判断工具，它可以结合ping nslookup tracert 来判断网络的相关特性,这个命令就是mtr
+123mtr -h 提供帮助命令 mtr -v 显示mtr的版本信息 mtr -r 已报告模式显示
+12345678910111213[root@10.10.90.97 ~]# mtr -r 202.108.33.94FOCUS9097 Snt: 10 Lo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://blog.xuguruogu.com/2017/03/19/hello-world/index.html">
+<meta property="og:title" content="linux路由分析mtr命令">
+<meta property="og:url" content="http://blog.xuguruogu.com/2017/03/19/linux路由分析mtr命令/index.html">
 <meta property="og:site_name" content="kent">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2017-03-19T11:43:38.000Z">
+<meta property="og:description" content="在Linux中有一个更好的网络连通性判断工具，它可以结合ping nslookup tracert 来判断网络的相关特性,这个命令就是mtr
+123mtr -h 提供帮助命令 mtr -v 显示mtr的版本信息 mtr -r 已报告模式显示
+12345678910111213[root@10.10.90.97 ~]# mtr -r 202.108.33.94FOCUS9097 Snt: 10 Lo">
+<meta property="og:updated_time" content="2017-03-19T13:28:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="linux路由分析mtr命令">
+<meta name="twitter:description" content="在Linux中有一个更好的网络连通性判断工具，它可以结合ping nslookup tracert 来判断网络的相关特性,这个命令就是mtr
+123mtr -h 提供帮助命令 mtr -v 显示mtr的版本信息 mtr -r 已报告模式显示
+12345678910111213[root@10.10.90.97 ~]# mtr -r 202.108.33.94FOCUS9097 Snt: 10 Lo">
 
 
 
@@ -127,13 +130,13 @@ Quick">
 
 
 
-  <link rel="canonical" href="http://blog.xuguruogu.com/2017/03/19/hello-world/"/>
+  <link rel="canonical" href="http://blog.xuguruogu.com/2017/03/19/linux路由分析mtr命令/"/>
 
 
 
 
 
-  <title> Hello World | kent </title>
+  <title> linux路由分析mtr命令 | kent </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh">
@@ -252,7 +255,7 @@ Quick">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.xuguruogu.com/2017/03/19/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://blog.xuguruogu.com/2017/03/19/linux路由分析mtr命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="kent">
@@ -273,7 +276,7 @@ Quick">
             
             
               
-                Hello World
+                linux路由分析mtr命令
               
             
           </h1>
@@ -288,7 +291,7 @@ Quick">
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T19:43:38+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T21:24:05+08:00">
                 2017-03-19
               </time>
             
@@ -324,16 +327,14 @@ Quick">
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+        <p>在Linux中有一个更好的网络连通性判断工具，它可以结合ping nslookup tracert 来判断网络的相关特性,这个命令就是mtr</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mtr -h 提供帮助命令 </div><div class="line">mtr -v 显示mtr的版本信息 </div><div class="line">mtr -r 已报告模式显示</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@10.10.90.97 ~]<span class="comment"># mtr -r 202.108.33.94</span></div><div class="line">FOCUS9097 Snt: 10 Loss% Last Avg Best Wrst StDev</div><div class="line">220.181.61.252 0.0% 6.8 3.3 1.8 7.4 2.2</div><div class="line">220.181.17.217 0.0% 0.4 0.5 0.4 0.7 0.1</div><div class="line">220.181.16.17 0.0% 0.6 0.5 0.5 0.6 0.0</div><div class="line">202.97.53.14 10.0% 0.7 0.7 0.7 0.8 0.0</div><div class="line">219.158.35.1 0.0% 0.8 0.8 0.8 0.9 0.0</div><div class="line">219.158.5.81 0.0% 1.2 1.3 1.2 1.6 0.1</div><div class="line">123.126.0.138 0.0% 1.2 1.1 1.1 1.3 0.1</div><div class="line">61.148.153.126 0.0% 1.9 10.5 1.5 89.9 27.9</div><div class="line">61.148.143.22 0.0% 1.5 1.6 1.5 1.7 0.0</div><div class="line">210.74.178.198 0.0% 1.6 1.6 1.5 1.9 0.1</div><div class="line">202.108.33.94 0.0% 1.5 1.5 1.4 1.5 0.0</div></pre></td></tr></table></figure>
+<p>报告说明：<br>第一列:显示的是IP地址和本机域名，这点和tracert很像<br>第二列:snt:10 设置每秒发送数据包的数量，默认值是10 可以通过参数 -c来指定。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@10.10.90.97 ~]<span class="comment"># mtr -r -c 15 202.108.33.94</span></div><div class="line">FOCUS9097 Snt: 15 Loss% Last Avg Best Wrst StDev</div><div class="line">220.181.61.252 0.0% 1.9 3.4 1.8 12.9 3.1</div><div class="line">220.181.17.217 0.0% 0.5 0.5 0.4 0.8 0.1</div><div class="line">220.181.16.17 0.0% 0.5 0.6 0.5 2.3 0.5</div><div class="line">202.97.53.14 0.0% 0.7 0.7 0.7 0.7 0.0</div><div class="line">219.158.35.1 0.0% 0.9 0.8 0.8 0.9 0.0</div><div class="line">219.158.5.81 0.0% 1.3 2.8 1.2 22.8 5.5</div><div class="line">123.126.0.138 0.0% 1.1 1.1 1.1 1.2 0.0</div><div class="line">61.148.153.126 0.0% 13.8 7.4 1.6 60.4 15.5</div><div class="line">61.148.143.22 0.0% 1.7 1.6 1.5 1.8 0.1</div><div class="line">210.74.178.198 0.0% 1.6 1.6 1.4 1.7 0.1</div><div class="line">202.108.33.94 0.0% 1.5 1.5 1.4 1.7 0.1</div></pre></td></tr></table></figure>
+<p>其中-c的说明是：–report-cycles COUNT</p>
+<p>第三列:是显示的每个对应IP的丢包率<br>第四列:显示的最近一次的返回时延<br>第五列:是平均值 这个应该是发送ping包的平均时延<br>第六列:是最好或者说时延最短的<br>第七列:是最差或者说时延最常的<br>第八列:是标准偏差<br>接下来接着说相关参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mtr <span class="_">-s</span> 用来指定ping数据包的大小 </div><div class="line">mtr -n no-dns不对IP地址做域名解析 </div><div class="line">mtr <span class="_">-a</span> 来设置发送数据包的IP地址 这个对一个主机由多个IP地址是有用的 </div><div class="line">mtr -i 使用这个参数来设置ICMP返回之间的要求默认是1秒 </div><div class="line">mtr -4 IPv4 </div><div class="line">mtr -6 IPv6</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -360,6 +361,12 @@ Quick">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
 
       
         
@@ -369,15 +376,15 @@ Quick">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/03/19/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/19/linux路由分析mtr命令/" rel="prev" title="linux路由分析mtr命令">
-                linux路由分析mtr命令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -424,17 +431,8 @@ Quick">
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -487,22 +485,6 @@ Quick">
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
