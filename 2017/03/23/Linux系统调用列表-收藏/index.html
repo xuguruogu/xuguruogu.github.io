@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>kent每天都要进步</title>
+  <title>Linux系统调用列表(收藏) | kent每天都要进步</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="勿在浮沙筑高台">
-<meta property="og:type" content="website">
-<meta property="og:title" content="kent每天都要进步">
-<meta property="og:url" content="http://blog.xuguruogu.com/index.html">
+  <meta name="description" content="以下是Linux系统调用的一个列表，包含了大部分常用系统调用和由系统调用派生出的的函数。这可能是你在互联网上所能看到的唯一一篇中文注释的Linux系统调用列表，即使是简单的字母序英文列表，能做到这么完全也是很罕见的。
+按照惯例，这个列表以man pages第2节，即系统调用节为蓝本。按照笔者的理解，对其作了大致的分类，同时也作了一些小小的修改，删去了几个仅供内核使用，不允许用户调用的系统调用，对个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统调用列表(收藏)">
+<meta property="og:url" content="http://blog.xuguruogu.com/2017/03/23/Linux系统调用列表-收藏/index.html">
 <meta property="og:site_name" content="kent每天都要进步">
-<meta property="og:description" content="勿在浮沙筑高台">
+<meta property="og:description" content="以下是Linux系统调用的一个列表，包含了大部分常用系统调用和由系统调用派生出的的函数。这可能是你在互联网上所能看到的唯一一篇中文注释的Linux系统调用列表，即使是简单的字母序英文列表，能做到这么完全也是很罕见的。
+按照惯例，这个列表以man pages第2节，即系统调用节为蓝本。按照笔者的理解，对其作了大致的分类，同时也作了一些小小的修改，删去了几个仅供内核使用，不允许用户调用的系统调用，对个">
+<meta property="og:updated_time" content="2017-03-22T16:31:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kent每天都要进步">
-<meta name="twitter:description" content="勿在浮沙筑高台">
+<meta name="twitter:title" content="Linux系统调用列表(收藏)">
+<meta name="twitter:description" content="以下是Linux系统调用的一个列表，包含了大部分常用系统调用和由系统调用派生出的的函数。这可能是你在互联网上所能看到的唯一一篇中文注释的Linux系统调用列表，即使是简单的字母序英文列表，能做到这么完全也是很罕见的。
+按照惯例，这个列表以man pages第2节，即系统调用节为蓝本。按照笔者的理解，对其作了大致的分类，同时也作了一些小小的修改，删去了几个仅供内核使用，不允许用户调用的系统调用，对个">
   
     <link rel="alternate" href="/atom.xml" title="kent每天都要进步" type="application/atom+xml">
   
@@ -64,9 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Linux系统调用列表-收藏" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Linux系统调用列表-收藏" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/23/Linux系统调用列表-收藏/" class="article-date">
   <time datetime="2017-03-22T16:14:08.000Z" itemprop="datePublished">2017-03-23</time>
@@ -79,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/23/Linux系统调用列表-收藏/">Linux系统调用列表(收藏)</a>
+    <h1 class="article-title" itemprop="name">
+      Linux系统调用列表(收藏)
     </h1>
   
 
@@ -1098,59 +1100,26 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-linux路由分析mtr命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/19/linux路由分析mtr命令/" class="article-date">
-  <time datetime="2017-03-19T13:24:05.000Z" itemprop="datePublished">2017-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/19/linux路由分析mtr命令/">linux路由分析mtr命令</a>
-    </h1>
+    <a href="/2017/03/19/linux路由分析mtr命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux路由分析mtr命令</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Linux中有一个更好的网络连通性判断工具，它可以结合ping nslookup tracert 来判断网络的相关特性,这个命令就是mtr</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mtr -h 提供帮助命令 </div><div class="line">mtr -v 显示mtr的版本信息 </div><div class="line">mtr -r 已报告模式显示</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@10.10.90.97 ~]<span class="comment"># mtr -r 202.108.33.94</span></div><div class="line">FOCUS9097 Snt: 10 Loss% Last Avg Best Wrst StDev</div><div class="line">220.181.61.252 0.0% 6.8 3.3 1.8 7.4 2.2</div><div class="line">220.181.17.217 0.0% 0.4 0.5 0.4 0.7 0.1</div><div class="line">220.181.16.17 0.0% 0.6 0.5 0.5 0.6 0.0</div><div class="line">202.97.53.14 10.0% 0.7 0.7 0.7 0.8 0.0</div><div class="line">219.158.35.1 0.0% 0.8 0.8 0.8 0.9 0.0</div><div class="line">219.158.5.81 0.0% 1.2 1.3 1.2 1.6 0.1</div><div class="line">123.126.0.138 0.0% 1.2 1.1 1.1 1.3 0.1</div><div class="line">61.148.153.126 0.0% 1.9 10.5 1.5 89.9 27.9</div><div class="line">61.148.143.22 0.0% 1.5 1.6 1.5 1.7 0.0</div><div class="line">210.74.178.198 0.0% 1.6 1.6 1.5 1.9 0.1</div><div class="line">202.108.33.94 0.0% 1.5 1.5 1.4 1.5 0.0</div></pre></td></tr></table></figure>
-<p>报告说明：<br>第一列:显示的是IP地址和本机域名，这点和tracert很像<br>第二列:snt:10 设置每秒发送数据包的数量，默认值是10 可以通过参数 -c来指定。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@10.10.90.97 ~]<span class="comment"># mtr -r -c 15 202.108.33.94</span></div><div class="line">FOCUS9097 Snt: 15 Loss% Last Avg Best Wrst StDev</div><div class="line">220.181.61.252 0.0% 1.9 3.4 1.8 12.9 3.1</div><div class="line">220.181.17.217 0.0% 0.5 0.5 0.4 0.8 0.1</div><div class="line">220.181.16.17 0.0% 0.5 0.6 0.5 2.3 0.5</div><div class="line">202.97.53.14 0.0% 0.7 0.7 0.7 0.7 0.0</div><div class="line">219.158.35.1 0.0% 0.9 0.8 0.8 0.9 0.0</div><div class="line">219.158.5.81 0.0% 1.3 2.8 1.2 22.8 5.5</div><div class="line">123.126.0.138 0.0% 1.1 1.1 1.1 1.2 0.0</div><div class="line">61.148.153.126 0.0% 13.8 7.4 1.6 60.4 15.5</div><div class="line">61.148.143.22 0.0% 1.7 1.6 1.5 1.8 0.1</div><div class="line">210.74.178.198 0.0% 1.6 1.6 1.4 1.7 0.1</div><div class="line">202.108.33.94 0.0% 1.5 1.5 1.4 1.7 0.1</div></pre></td></tr></table></figure>
-<p>其中-c的说明是：–report-cycles COUNT</p>
-<p>第三列:是显示的每个对应IP的丢包率<br>第四列:显示的最近一次的返回时延<br>第五列:是平均值 这个应该是发送ping包的平均时延<br>第六列:是最好或者说时延最短的<br>第七列:是最差或者说时延最常的<br>第八列:是标准偏差<br>接下来接着说相关参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mtr <span class="_">-s</span> 用来指定ping数据包的大小 </div><div class="line">mtr -n no-dns不对IP地址做域名解析 </div><div class="line">mtr <span class="_">-a</span> 来设置发送数据包的IP地址 这个对一个主机由多个IP地址是有用的 </div><div class="line">mtr -i 使用这个参数来设置ICMP返回之间的要求默认是1秒 </div><div class="line">mtr -4 IPv4 </div><div class="line">mtr -6 IPv6</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/19/linux路由分析mtr命令/" data-id="cj0l6sz4700016ps6dzzgbmdd" class="article-share-link">Share</a>
-      
-        <a href="http://blog.xuguruogu.com/2017/03/19/linux路由分析mtr命令/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 
-  
-
-
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
 </section>
         
           <aside id="sidebar">
@@ -1230,11 +1199,13 @@
 <script>
   var disqus_shortname = 'blog-xuguruogu-com';
   
+  var disqus_url = 'http://blog.xuguruogu.com/2017/03/23/Linux系统调用列表-收藏/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
