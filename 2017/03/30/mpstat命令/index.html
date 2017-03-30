@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mpstat命令 | kent每天都要进步</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="mpstat是MultiProcessor Statistics的缩写，是实时系统监控工具。其报告与CPU的一些统计信息，这些信息存放在/proc/stat文件中。在多CPUs系统里，其不但能查看所有CPU的平均状况信息，而且能够查看特定CPU的信息。下面只介绍mpstat与CPU相关的参数，mpstat的语法如下：
+Usage: mpstat [ options... ] [ &amp;lt;inter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mpstat命令">
+<meta property="og:url" content="http://blog.xuguruogu.com/2017/03/30/mpstat命令/index.html">
+<meta property="og:site_name" content="kent每天都要进步">
+<meta property="og:description" content="mpstat是MultiProcessor Statistics的缩写，是实时系统监控工具。其报告与CPU的一些统计信息，这些信息存放在/proc/stat文件中。在多CPUs系统里，其不但能查看所有CPU的平均状况信息，而且能够查看特定CPU的信息。下面只介绍mpstat与CPU相关的参数，mpstat的语法如下：
+Usage: mpstat [ options... ] [ &amp;lt;inter">
+<meta property="og:updated_time" content="2017-03-30T07:37:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mpstat命令">
+<meta name="twitter:description" content="mpstat是MultiProcessor Statistics的缩写，是实时系统监控工具。其报告与CPU的一些统计信息，这些信息存放在/proc/stat文件中。在多CPUs系统里，其不但能查看所有CPU的平均状况信息，而且能够查看特定CPU的信息。下面只介绍mpstat与CPU相关的参数，mpstat的语法如下：
+Usage: mpstat [ options... ] [ &amp;lt;inter">
+  
+    <link rel="alternate" href="/atom.xml" title="kent每天都要进步" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kent每天都要进步</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">ITer的觉悟</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xuguruogu.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="linux性能测试-mpstat命令" class="article article-type-linux性能测试" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/30/mpstat命令/" class="article-date">
+  <time datetime="2017-03-30T07:35:35.000Z" itemprop="datePublished">2017-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mpstat命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mpstat是MultiProcessor Statistics的缩写，是实时系统监控工具。其报告与CPU的一些统计信息，这些信息存放在/proc/stat文件中。在多CPUs系统里，其不但能查看所有CPU的平均状况信息，而且能够查看特定CPU的信息。<br>下面只介绍mpstat与CPU相关的参数，mpstat的语法如下：</p>
+<pre><code>Usage: mpstat [ options... ] [ &lt;interval&gt; [ &lt;count&gt; ] ]
+Options are:
+[ -P { &lt;cpu&gt; | ALL } ] [ -V ]
+</code></pre><p>参数的含义如下：<br>参数 解释<br>-P {|ALL} 表示监控哪个CPU， cpu在[0,cpu个数-1]中取值<br>internal 相邻的两次采样的间隔时间<br>count 采样的次数，count只能和delay一起使用</p>
+<p>当没有参数时，mpstat则显示系统启动以后所有信息的平均值。有interval时，第一行的信息自系统启动以来的平均信息。<br>从第二行开始，输出为前一个interval时间段的平均信息。</p>
+<p>与CPU有关的输出的含义如下：<br>参数 解释 从/proc/stat获得数据<br>CPU 处理器ID<br>user 在internal时间段里，用户态的CPU时间（%），不包含 nice值为负 进程 (usr/total)<em>100<br>nice 在internal时间段里，nice值为负进程的CPU时间（%）   (nice/total)</em>100<br>system 在internal时间段里，核心时间（%）   (system/total)<em>100<br>iowait 在internal时间段里，硬盘IO等待时间（%） (iowait/total)</em>100<br>irq 在internal时间段里，硬中断时间（%）      (irq/total)<em>100<br>soft 在internal时间段里，软中断时间（%）    (softirq/total)</em>100<br>idle 在internal时间段里，CPU除去等待磁盘IO操作外的因为任何原因而空闲的时间闲置时间（%）(idle/total)<em>100<br>intr/s 在internal时间段里，每秒CPU接收的中断的次数intr/total)</em>100<br>CPU总的工作时间=total_cur=user+system+nice+idle+iowait+irq+softirq<br>total_pre=pre_user+ pre_system+ pre_nice+ pre_idle+ pre_iowait+ pre_irq+ pre_softirq<br>user=user_cur – user_pre<br>total=total_cur-total_pre<br>其中_cur 表示当前值，_pre表示interval时间前的值。上表中的所有值可取到两位小数点。</p>
+<p>范例1：average mode (粗略信息)<br>当mpstat不带参数时，输出为从系统启动以来的平均值。</p>
+<pre><code>[root@C44 ~]#  mpstat
+Linux 2.6.14.7-selinux1-WR1.4aq_cgl (MSP)       07/26/12
+
+12:47:05     CPU   %user   %nice    %sys %iowait    %irq   %soft   %idle    intr/s
+12:47:05     all    2.98    0.00    2.68    2.12    0.05    0.31   91.87    391.82
+</code></pre><p>范例2: 每2秒产生了2个处理器的统计数据报告<br>下面的命令可以每2秒产生了2个处理器的统计数据报告，一共产生三个interval 的信息，然后再给出这三个interval的平<br>均信息。默认时，输出是按照CPU 号排序。第一个行给出了从系统引导以来的所有活跃数据。接下来每行对应一个处理器的<br>活跃状态。。</p>
+<pre><code>[root@C44 ~]#  mpstat -P ALL 2 3
+Linux 2.6.14.7-selinux1-WR1.4aq_cgl (MSP)       07/26/12
+
+12:47:11     CPU   %user   %nice    %sys %iowait    %irq   %soft   %idle    intr/s
+12:47:13     all    1.51    0.00    0.76    0.00    0.00    0.25   97.48    296.50
+12:47:13       0    2.50    0.00    2.00    0.00    0.00    0.50   95.00    296.50
+12:47:13       1    1.00    0.00    0.00    0.00    0.00    0.50   98.00      0.00
+
+12:47:13     CPU   %user   %nice    %sys %iowait    %irq   %soft   %idle    intr/s
+12:47:15     all    0.50    0.00    0.25    0.00    0.00    0.00   99.24    295.45
+12:47:15       0    1.01    0.00    0.00    0.00    0.00    0.00   98.99    295.45
+12:47:15       1    0.00    0.00    0.00    0.00    0.00    0.00  100.00      0.00
+
+12:47:15     CPU   %user   %nice    %sys %iowait    %irq   %soft   %idle    intr/s
+12:47:17     all    0.51    0.00    0.76    0.25    0.00    0.25   98.23    299.49
+12:47:17       0    1.01    0.00    1.01    0.00    0.00    0.51   97.47    299.49
+12:47:17       1    0.00    0.00    1.01    0.00    0.00    0.00   99.49      0.00
+
+Average:     CPU   %user   %nice    %sys %iowait    %irq   %soft   %idle    intr/s
+Average:     all    0.84    0.00    0.59    0.08    0.00    0.17   98.32    297.15
+Average:       0    1.51    0.00    1.01    0.00    0.00    0.34   97.15    297.15
+Average:       1    0.34    0.00    0.34    0.00    0.00    0.17   99.16      0.00
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/mpstat命令/" data-id="cj0w38bv10004pfs6dnm7ool7" class="article-share-link">Teilen</a>
+      
+        <a href="http://blog.xuguruogu.com/2017/03/30/mpstat命令/#disqus_thread" class="article-comment-link">Kommentare</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpu/">cpu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/30/网卡队列RSS-RPS-RFS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">网卡队列RSS/RPS/RFS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpu/">cpu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/30/mpstat命令/">mpstat命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/网卡队列RSS-RPS-RFS/">网卡队列RSS/RPS/RFS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/proc-irq-number-smp-affinity/">/proc/irq/{number}/smp_affinity</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/cpu含义/">cpu含义</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/linux下cpu物理个数、多核、超线程判断解析/">linux下cpu物理个数、多核、超线程判断解析</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kent<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'blog-xuguruogu-com';
+  
+  var disqus_url = 'http://blog.xuguruogu.com/2017/03/30/mpstat命令/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

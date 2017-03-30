@@ -3,24 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>cpu含义 | kent每天都要进步</title>
+  <title>网卡队列RSS/RPS/RFS | kent每天都要进步</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用系统命令top即可看到如下类似信息：
-Cpu(s):  0.0%us,  0.5%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
-us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: is meaning of” nice CPU time">
+  <meta name="description" content="网卡优化RSS receive side scaling，网卡多队列，需要硬件支持。网卡接收到网络数据包后，要发送一个硬件中断，通知CPU取数据包。默认配置，都是由CPU0去做。RPS receive packet steering，向某个CPU发送一个软中断，来接收数据包，并递交给应用程序。RFS receive flow streering，维护两种hash表，实现将软中断分散到多颗CPU上去">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cpu含义">
-<meta property="og:url" content="http://blog.xuguruogu.com/2017/03/30/cpu含义/index.html">
+<meta property="og:title" content="网卡队列RSS/RPS/RFS">
+<meta property="og:url" content="http://blog.xuguruogu.com/2017/03/30/网卡队列RSS-RPS-RFS/index.html">
 <meta property="og:site_name" content="kent每天都要进步">
-<meta property="og:description" content="使用系统命令top即可看到如下类似信息：
-Cpu(s):  0.0%us,  0.5%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
-us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: is meaning of” nice CPU time">
-<meta property="og:updated_time" content="2017-03-30T05:54:22.000Z">
+<meta property="og:description" content="网卡优化RSS receive side scaling，网卡多队列，需要硬件支持。网卡接收到网络数据包后，要发送一个硬件中断，通知CPU取数据包。默认配置，都是由CPU0去做。RPS receive packet steering，向某个CPU发送一个软中断，来接收数据包，并递交给应用程序。RFS receive flow streering，维护两种hash表，实现将软中断分散到多颗CPU上去">
+<meta property="og:updated_time" content="2017-03-30T07:29:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cpu含义">
-<meta name="twitter:description" content="使用系统命令top即可看到如下类似信息：
-Cpu(s):  0.0%us,  0.5%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
-us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: is meaning of” nice CPU time">
+<meta name="twitter:title" content="网卡队列RSS/RPS/RFS">
+<meta name="twitter:description" content="网卡优化RSS receive side scaling，网卡多队列，需要硬件支持。网卡接收到网络数据包后，要发送一个硬件中断，通知CPU取数据包。默认配置，都是由CPU0去做。RPS receive packet steering，向某个CPU发送一个软中断，来接收数据包，并递交给应用程序。RFS receive flow streering，维护两种hash表，实现将软中断分散到多颗CPU上去">
   
     <link rel="alternate" href="/atom.xml" title="kent每天都要进步" type="application/atom+xml">
   
@@ -71,10 +65,10 @@ us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: 
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="top-cpu含义" class="article article-type-top" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-网卡队列RSS-RPS-RFS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/30/cpu含义/" class="article-date">
-  <time datetime="2017-03-30T05:52:25.000Z" itemprop="datePublished">2017-03-30</time>
+    <a href="/2017/03/30/网卡队列RSS-RPS-RFS/" class="article-date">
+  <time datetime="2017-03-30T07:25:27.000Z" itemprop="datePublished">2017-03-30</time>
 </a>
     
   </div>
@@ -85,7 +79,7 @@ us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: 
         
   
     <h1 class="article-title" itemprop="name">
-      cpu含义
+      网卡队列RSS/RPS/RFS
     </h1>
   
 
@@ -93,20 +87,27 @@ us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: 
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用系统命令top即可看到如下类似信息：</p>
-<p>Cpu(s):  0.0%us,  0.5%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</p>
-<p>us: is meaning of “user CPU time”<br>sy: is meaning of “system CPU time”<br>ni: is meaning of” nice CPU time”<br>id: is meaning of “idle”<br>wa: is meaning of “iowait”<br>hi：is meaning of “hardware irq”<br>si : is meaning of “software irq”<br>st : is meaning of “steal time”</p>
-<p>us 用户空间占用CPU百分比<br>sy 内核空间占用CPU百分比<br>ni 用户进程空间内改变过优先级的进程占用CPU百分比<br>id 空闲CPU百分比<br>wa 等待输入输出的CPU时间百分比<br>hi 硬件中断<br>si 软件中断<br>st: 实时</p>
+        <p>网卡优化<br>RSS receive side scaling，网卡多队列，需要硬件支持。网卡接收到网络数据包后，要发送一个硬件中断，通知CPU取数据包。默认配置，都是由CPU0去做。<br>RPS receive packet steering，向某个CPU发送一个软中断，来接收数据包，并递交给应用程序。<br>RFS receive flow streering，维护两种hash表，实现将软中断分散到多颗CPU上去处理。</p>
+<ul>
+<li>选择支持msi-x中断方式的网卡类型<br>#lspci –v</li>
+<li>网卡需要支持多队列<br>#lspci –vvv<br>如果有MSI-X &amp;&amp; Enable+ &amp;&amp; TabSize &gt; 1，则该网卡是多队列网卡</li>
+<li><p>2.6.35 以后的内核版本都支持google的RPS/RFS补丁，RHEL6.1以后。这个功能默认关闭需要手工开启<br>开启RPS(两颗4c的CPU)<br>#echo ff &gt; /sys/class/net/eth0/queues/rx-0/rps_cpus<br>开启RFS(内存大的机器可以设置大于4096)<br>#echo 4096 &gt; /sys/class/net/eth0/queues/rx-0/rps_flow_cnt<br>4096*N(N网卡队列数# cat /proc/interrupts | grep eth0)<br>#echo 32768 &gt; /proc/sys/net/core/rps_sock_flow_entries</p>
+</li>
+<li><p><a href="http://blog.netzhou.net/?p=181" target="_blank" rel="external">http://blog.netzhou.net/?p=181</a></p>
+</li>
+<li><a href="http://blog.csdn.net/turkeyzhou/article/details/7528182" target="_blank" rel="external">http://blog.csdn.net/turkeyzhou/article/details/7528182</a></li>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/index.html" target="_blank" rel="external">https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/index.html</a></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/30/cpu含义/" data-id="cj0w38bue0000pfs6b0a5ke7f" class="article-share-link">Teilen</a>
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/网卡队列RSS-RPS-RFS/" data-id="cj0w38bvk000apfs653o5tvh6" class="article-share-link">Teilen</a>
       
-        <a href="http://blog.xuguruogu.com/2017/03/30/cpu含义/#disqus_thread" class="article-comment-link">Kommentare</a>
+        <a href="http://blog.xuguruogu.com/2017/03/30/网卡队列RSS-RPS-RFS/#disqus_thread" class="article-comment-link">Kommentare</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp/">tcp</a></li></ul>
 
     </footer>
   </div>
@@ -114,19 +115,19 @@ us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: 
     
 <nav id="article-nav">
   
-    <a href="/2017/03/30/proc-irq-number-smp-affinity/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/03/30/mpstat命令/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
-          /proc/irq/{number}/smp_affinity
+          mpstat命令
         
       </div>
     </a>
   
   
-    <a href="/2017/03/30/linux下cpu物理个数、多核、超线程判断解析/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/03/30/proc-irq-number-smp-affinity/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">linux下cpu物理个数、多核、超线程判断解析</div>
+      <div class="article-nav-title">/proc/irq/{number}/smp_affinity</div>
     </a>
   
 </nav>
@@ -231,7 +232,7 @@ us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: 
 <script>
   var disqus_shortname = 'blog-xuguruogu-com';
   
-  var disqus_url = 'http://blog.xuguruogu.com/2017/03/30/cpu含义/';
+  var disqus_url = 'http://blog.xuguruogu.com/2017/03/30/网卡队列RSS-RPS-RFS/';
   
   (function(){
     var dsq = document.createElement('script');
