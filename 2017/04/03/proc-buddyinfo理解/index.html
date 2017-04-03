@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>/proc/buddyinfo理解 | kent每天都要进步</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="/proc/buddyinfoThis file is used primarily for diagnosing memory fragmentation issues. Using the buddy algorithm, each column represents the number of pages of a certain order (a certain size) that ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="/proc/buddyinfo理解">
+<meta property="og:url" content="http://blog.xuguruogu.com/2017/04/03/proc-buddyinfo理解/index.html">
+<meta property="og:site_name" content="kent每天都要进步">
+<meta property="og:description" content="/proc/buddyinfoThis file is used primarily for diagnosing memory fragmentation issues. Using the buddy algorithm, each column represents the number of pages of a certain order (a certain size) that ar">
+<meta property="og:updated_time" content="2017-04-03T02:03:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="/proc/buddyinfo理解">
+<meta name="twitter:description" content="/proc/buddyinfoThis file is used primarily for diagnosing memory fragmentation issues. Using the buddy algorithm, each column represents the number of pages of a certain order (a certain size) that ar">
+  
+    <link rel="alternate" href="/atom.xml" title="kent每天都要进步" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kent每天都要进步</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">ITer的觉悟</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xuguruogu.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-proc-buddyinfo理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/03/proc-buddyinfo理解/" class="article-date">
+  <time datetime="2017-04-03T01:43:04.000Z" itemprop="datePublished">2017-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      /proc/buddyinfo理解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>/proc/buddyinfo<br>This file is used primarily for diagnosing memory fragmentation issues. Using the buddy algorithm, each column represents the number of pages of a certain order (a certain size) that are available at any given time. For example, for zone DMA (direct memory access), there are 90 of 2^(0<em>PAGE_SIZE) chunks of memory. Similarly, there are 6 of 2^(1</em>PAGE_SIZE) chunks, and 2 of 2^(2*PAGE_SIZE) chunks of memory available.</p>
+<p>The DMA row references the first 16 MB on a system, the HighMem row references all memory greater than 4 GB on a system, and the Normal row references all memory in between.</p>
+<p>Each column of numbers represents the number of pages of that order which are available. In the example below, there are 7 chunks of 2 ^ 0 <em> PAGE_SIZE available in ZONE_DMA, and 12 chunks of 2 ^ 3 </em> PAGE_SIZE available in ZONE_NORMAL, etc…</p>
+<p>This information can give you a good idea about how fragmented memory is and give you a clue as to how big of an area you can safely allocate.</p>
+<p>When a Linux system has been running for a while memory fragmentation can increase which depends heavily on the nature of the applications that are running on it. The more processes allocate and free memory, the quicker memory becomes fragmented. And the kernel may not always be able to defragment enough memory for a requested size on time. If that happens, applications may not be able to allocate larger contiguous chunks of memory even though there is enough free memory available. Starting with the 2.6 kernel, i.e. RHEL4 and SLES9, memory management has improved tremendously and memory fragmentation has become less of an issue.</p>
+<p>To see memory fragmentation you can use the magic SysRq key. Simply execute the following command:</p>
+<h1 id="echo-m-gt-proc-sysrq-triggerThis-command-will-dump-current-memory-information-to-var-log-messages-Here-is-an-example-of-a-RHEL3-32-bit-system"><a href="#echo-m-gt-proc-sysrq-triggerThis-command-will-dump-current-memory-information-to-var-log-messages-Here-is-an-example-of-a-RHEL3-32-bit-system" class="headerlink" title="echo m &gt; /proc/sysrq-triggerThis command will dump current memory information to /var/log/messages. Here is an example of a RHEL3 32-bit system:"></a>echo m &gt; /proc/sysrq-triggerThis command will dump current memory information to /var/log/messages. Here is an example of a RHEL3 32-bit system:</h1><p>Jul 23 20:19:30 localhost kernel: 0<em>4kB 0</em>8kB 0<em>16kB 1</em>32kB 0<em>64kB 1</em>128kB 1<em>256kB 1</em>512kB 1<em>1024kB 0</em>2048kB 0<em>4096kB = 1952kB)<br>Jul 23 20:19:30 localhost kernel: 1395</em>4kB 355<em>8kB 209</em>16kB 15<em>32kB 0</em>64kB 0<em>128kB 0</em>256kB 0<em>512kB 0</em>1024kB 0<em>2048kB 0</em>4096kB = 12244kB)<br>Jul 23 20:19:31 localhost kernel: 1479<em>4kB 673</em>8kB 205<em>16kB 73</em>32kB 21<em>64kB 847</em>128kB 473<em>256kB 92</em>512kB 164<em>1024kB 64</em>2048kB 28*4096kB = 708564kB)The first line shows DMA memory fragmentation. The second line shows Low Memory fragmentation and the third line shows High Memory fragmentation. The output shows memory fragmentation in the Low Memory area. But there are many large memory chunks available in the High Memory area, e.g. 28 4MB.</p>
+<p>If memory information was not dumped to /var/log/messages, then SysRq was not enabled. You can enable SysRq by setting sysrq to 1:</p>
+<h1 id="echo-1-gt-proc-sys-kernel-sysrqStarting-with-the-2-6-kernel-i-e-RHEL4-and-SLES9-you-don’t-need-SysRq-to-dump-memory-information-You-can-simply-check-proc-buddyinfo-for-memory-fragmentation"><a href="#echo-1-gt-proc-sys-kernel-sysrqStarting-with-the-2-6-kernel-i-e-RHEL4-and-SLES9-you-don’t-need-SysRq-to-dump-memory-information-You-can-simply-check-proc-buddyinfo-for-memory-fragmentation" class="headerlink" title="echo 1 &gt; /proc/sys/kernel/sysrqStarting with the 2.6 kernel, i.e. RHEL4 and SLES9, you don’t need SysRq to dump memory information. You can simply check /proc/buddyinfo for memory fragmentation."></a>echo 1 &gt; /proc/sys/kernel/sysrqStarting with the 2.6 kernel, i.e. RHEL4 and SLES9, you don’t need SysRq to dump memory information. You can simply check /proc/buddyinfo for memory fragmentation.</h1><p>Here is the output of a 64-bit server running the 2.6 kernel:</p>
+<h1 id="cat-proc-buddyinfo"><a href="#cat-proc-buddyinfo" class="headerlink" title="cat /proc/buddyinfo"></a>cat /proc/buddyinfo</h1><pre><code>Node 0, zone DMA 5 4 3 4 3 2 1 0 1 1 2
+Node 0, zone Normal 1046 527 128 36 17 5 26 40 13 16 94
+</code></pre><h1 id="echo-m-gt-proc-sysrq-trigger"><a href="#echo-m-gt-proc-sysrq-trigger" class="headerlink" title="echo m &gt; /proc/sysrq-trigger"></a>echo m &gt; /proc/sysrq-trigger</h1><h1 id="grep-Normal-var-log-messages-tail-1"><a href="#grep-Normal-var-log-messages-tail-1" class="headerlink" title="grep Normal /var/log/messages | tail -1"></a>grep Normal /var/log/messages | tail -1</h1><pre><code>Jul 23 21:42:26 localhost kernel: Normal: 1046*4kB 529*8kB 129*16kB 36*32kB 17*64kB 5*128kB 26*256kB 40*512kB 13*1024kB 16*2048kB 94*4096kB = 471600kB
+</code></pre><p>#In this example I used SysRq again to show what each number in /proc/buddyinfo is referring</p>
+<p>根据以上文章理解内存碎片是怎么回事了。<br>471600kb就是可用的内存（可以连续分配的内存地址空间），以4kb，8,16,32,64,128,256,512,1024,2048,4096kb为单位的所有可分配内存之和。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xuguruogu.com/2017/04/03/proc-buddyinfo理解/" data-id="cj11h2bev0005c0s6wjtdm67u" class="article-share-link">Share</a>
+      
+        <a href="http://blog.xuguruogu.com/2017/04/03/proc-buddyinfo理解/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memory/">memory</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/30/查看系统硬件信息/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">查看系统硬件信息</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpu/">cpu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/03/proc-buddyinfo理解/">/proc/buddyinfo理解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/查看系统硬件信息/">查看系统硬件信息</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/mpstat命令/">mpstat命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/网卡队列RSS-RPS-RFS/">网卡队列RSS/RPS/RFS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/proc-irq-number-smp-affinity/">/proc/irq/{number}/smp_affinity</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kent<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'blog-xuguruogu-com';
+  
+  var disqus_url = 'http://blog.xuguruogu.com/2017/04/03/proc-buddyinfo理解/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

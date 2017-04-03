@@ -55,7 +55,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xuguruogu.com"></form>
@@ -65,6 +65,60 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-proc-buddyinfo理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/03/proc-buddyinfo理解/" class="article-date">
+  <time datetime="2017-04-03T01:43:04.000Z" itemprop="datePublished">2017-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/03/proc-buddyinfo理解/">/proc/buddyinfo理解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>/proc/buddyinfo<br>This file is used primarily for diagnosing memory fragmentation issues. Using the buddy algorithm, each column represents the number of pages of a certain order (a certain size) that are available at any given time. For example, for zone DMA (direct memory access), there are 90 of 2^(0<em>PAGE_SIZE) chunks of memory. Similarly, there are 6 of 2^(1</em>PAGE_SIZE) chunks, and 2 of 2^(2*PAGE_SIZE) chunks of memory available.</p>
+<p>The DMA row references the first 16 MB on a system, the HighMem row references all memory greater than 4 GB on a system, and the Normal row references all memory in between.</p>
+<p>Each column of numbers represents the number of pages of that order which are available. In the example below, there are 7 chunks of 2 ^ 0 <em> PAGE_SIZE available in ZONE_DMA, and 12 chunks of 2 ^ 3 </em> PAGE_SIZE available in ZONE_NORMAL, etc…</p>
+<p>This information can give you a good idea about how fragmented memory is and give you a clue as to how big of an area you can safely allocate.</p>
+<p>When a Linux system has been running for a while memory fragmentation can increase which depends heavily on the nature of the applications that are running on it. The more processes allocate and free memory, the quicker memory becomes fragmented. And the kernel may not always be able to defragment enough memory for a requested size on time. If that happens, applications may not be able to allocate larger contiguous chunks of memory even though there is enough free memory available. Starting with the 2.6 kernel, i.e. RHEL4 and SLES9, memory management has improved tremendously and memory fragmentation has become less of an issue.</p>
+<p>To see memory fragmentation you can use the magic SysRq key. Simply execute the following command:</p>
+<h1 id="echo-m-gt-proc-sysrq-triggerThis-command-will-dump-current-memory-information-to-var-log-messages-Here-is-an-example-of-a-RHEL3-32-bit-system"><a href="#echo-m-gt-proc-sysrq-triggerThis-command-will-dump-current-memory-information-to-var-log-messages-Here-is-an-example-of-a-RHEL3-32-bit-system" class="headerlink" title="echo m &gt; /proc/sysrq-triggerThis command will dump current memory information to /var/log/messages. Here is an example of a RHEL3 32-bit system:"></a>echo m &gt; /proc/sysrq-triggerThis command will dump current memory information to /var/log/messages. Here is an example of a RHEL3 32-bit system:</h1><p>Jul 23 20:19:30 localhost kernel: 0<em>4kB 0</em>8kB 0<em>16kB 1</em>32kB 0<em>64kB 1</em>128kB 1<em>256kB 1</em>512kB 1<em>1024kB 0</em>2048kB 0<em>4096kB = 1952kB)<br>Jul 23 20:19:30 localhost kernel: 1395</em>4kB 355<em>8kB 209</em>16kB 15<em>32kB 0</em>64kB 0<em>128kB 0</em>256kB 0<em>512kB 0</em>1024kB 0<em>2048kB 0</em>4096kB = 12244kB)<br>Jul 23 20:19:31 localhost kernel: 1479<em>4kB 673</em>8kB 205<em>16kB 73</em>32kB 21<em>64kB 847</em>128kB 473<em>256kB 92</em>512kB 164<em>1024kB 64</em>2048kB 28*4096kB = 708564kB)The first line shows DMA memory fragmentation. The second line shows Low Memory fragmentation and the third line shows High Memory fragmentation. The output shows memory fragmentation in the Low Memory area. But there are many large memory chunks available in the High Memory area, e.g. 28 4MB.</p>
+<p>If memory information was not dumped to /var/log/messages, then SysRq was not enabled. You can enable SysRq by setting sysrq to 1:</p>
+<h1 id="echo-1-gt-proc-sys-kernel-sysrqStarting-with-the-2-6-kernel-i-e-RHEL4-and-SLES9-you-don’t-need-SysRq-to-dump-memory-information-You-can-simply-check-proc-buddyinfo-for-memory-fragmentation"><a href="#echo-1-gt-proc-sys-kernel-sysrqStarting-with-the-2-6-kernel-i-e-RHEL4-and-SLES9-you-don’t-need-SysRq-to-dump-memory-information-You-can-simply-check-proc-buddyinfo-for-memory-fragmentation" class="headerlink" title="echo 1 &gt; /proc/sys/kernel/sysrqStarting with the 2.6 kernel, i.e. RHEL4 and SLES9, you don’t need SysRq to dump memory information. You can simply check /proc/buddyinfo for memory fragmentation."></a>echo 1 &gt; /proc/sys/kernel/sysrqStarting with the 2.6 kernel, i.e. RHEL4 and SLES9, you don’t need SysRq to dump memory information. You can simply check /proc/buddyinfo for memory fragmentation.</h1><p>Here is the output of a 64-bit server running the 2.6 kernel:</p>
+<h1 id="cat-proc-buddyinfo"><a href="#cat-proc-buddyinfo" class="headerlink" title="cat /proc/buddyinfo"></a>cat /proc/buddyinfo</h1><pre><code>Node 0, zone DMA 5 4 3 4 3 2 1 0 1 1 2
+Node 0, zone Normal 1046 527 128 36 17 5 26 40 13 16 94
+</code></pre><h1 id="echo-m-gt-proc-sysrq-trigger"><a href="#echo-m-gt-proc-sysrq-trigger" class="headerlink" title="echo m &gt; /proc/sysrq-trigger"></a>echo m &gt; /proc/sysrq-trigger</h1><h1 id="grep-Normal-var-log-messages-tail-1"><a href="#grep-Normal-var-log-messages-tail-1" class="headerlink" title="grep Normal /var/log/messages | tail -1"></a>grep Normal /var/log/messages | tail -1</h1><pre><code>Jul 23 21:42:26 localhost kernel: Normal: 1046*4kB 529*8kB 129*16kB 36*32kB 17*64kB 5*128kB 26*256kB 40*512kB 13*1024kB 16*2048kB 94*4096kB = 471600kB
+</code></pre><p>#In this example I used SysRq again to show what each number in /proc/buddyinfo is referring</p>
+<p>根据以上文章理解内存碎片是怎么回事了。<br>471600kb就是可用的内存（可以连续分配的内存地址空间），以4kb，8,16,32,64,128,256,512,1024,2048,4096kb为单位的所有可分配内存之和。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xuguruogu.com/2017/04/03/proc-buddyinfo理解/" data-id="cj11h2bev0005c0s6wjtdm67u" class="article-share-link">Share</a>
+      
+        <a href="http://blog.xuguruogu.com/2017/04/03/proc-buddyinfo理解/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memory/">memory</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="linux-查看系统硬件信息" class="article article-type-linux" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -175,9 +229,9 @@ BIOS Language Information
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/30/查看系统硬件信息/" data-id="cj0w58i8b000449s6lvy747k7" class="article-share-link">Teilen</a>
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/查看系统硬件信息/" data-id="cj11h2bf20008c0s6vlr4t603" class="article-share-link">Share</a>
       
-        <a href="http://blog.xuguruogu.com/2017/03/30/查看系统硬件信息/#disqus_thread" class="article-comment-link">Kommentare</a>
+        <a href="http://blog.xuguruogu.com/2017/03/30/查看系统硬件信息/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -251,9 +305,9 @@ Average:       1    0.34    0.00    0.34    0.00    0.00    0.17   99.16      0.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/30/mpstat命令/" data-id="cj0w58i8g000549s6d9uub3uo" class="article-share-link">Teilen</a>
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/mpstat命令/" data-id="cj11h2beq0004c0s68ajgmert" class="article-share-link">Share</a>
       
-        <a href="http://blog.xuguruogu.com/2017/03/30/mpstat命令/#disqus_thread" class="article-comment-link">Kommentare</a>
+        <a href="http://blog.xuguruogu.com/2017/03/30/mpstat命令/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpu/">cpu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -302,9 +356,9 @@ Average:       1    0.34    0.00    0.34    0.00    0.00    0.17   99.16      0.
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/30/网卡队列RSS-RPS-RFS/" data-id="cj0w58i8u000c49s6q7c7402j" class="article-share-link">Teilen</a>
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/网卡队列RSS-RPS-RFS/" data-id="cj11h2bfb000dc0s6zqx5nnc2" class="article-share-link">Share</a>
       
-        <a href="http://blog.xuguruogu.com/2017/03/30/网卡队列RSS-RPS-RFS/#disqus_thread" class="article-comment-link">Kommentare</a>
+        <a href="http://blog.xuguruogu.com/2017/03/30/网卡队列RSS-RPS-RFS/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp/">tcp</a></li></ul>
@@ -401,9 +455,9 @@ CPU 2    0100         4
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/30/proc-irq-number-smp-affinity/" data-id="cj0w58i8n000949s6zwk6i7m4" class="article-share-link">Teilen</a>
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/proc-irq-number-smp-affinity/" data-id="cj11h2bfa000bc0s65jx7fj41" class="article-share-link">Share</a>
       
-        <a href="http://blog.xuguruogu.com/2017/03/30/proc-irq-number-smp-affinity/#disqus_thread" class="article-comment-link">Kommentare</a>
+        <a href="http://blog.xuguruogu.com/2017/03/30/proc-irq-number-smp-affinity/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -445,9 +499,9 @@ CPU 2    0100         4
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/30/cpu含义/" data-id="cj0w58i88000349s6qqj582pj" class="article-share-link">Teilen</a>
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/cpu含义/" data-id="cj11h2beg0001c0s63r3ql2qh" class="article-share-link">Share</a>
       
-        <a href="http://blog.xuguruogu.com/2017/03/30/cpu含义/#disqus_thread" class="article-comment-link">Kommentare</a>
+        <a href="http://blog.xuguruogu.com/2017/03/30/cpu含义/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -536,9 +590,9 @@ CPU 2    0100         4
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/30/linux下cpu物理个数、多核、超线程判断解析/" data-id="cj0w58i7w000149s6csndnpuh" class="article-share-link">Teilen</a>
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/linux下cpu物理个数、多核、超线程判断解析/" data-id="cj11h2beo0003c0s6x4i2fb6g" class="article-share-link">Share</a>
       
-        <a href="http://blog.xuguruogu.com/2017/03/30/linux下cpu物理个数、多核、超线程判断解析/#disqus_thread" class="article-comment-link">Kommentare</a>
+        <a href="http://blog.xuguruogu.com/2017/03/30/linux下cpu物理个数、多核、超线程判断解析/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -1574,9 +1628,9 @@ CPU 2    0100         4
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/23/Linux系统调用列表-收藏/" data-id="cj0w58i7q000049s6oburdr4e" class="article-share-link">Teilen</a>
+      <a data-url="http://blog.xuguruogu.com/2017/03/23/Linux系统调用列表-收藏/" data-id="cj11h2be90000c0s6wcp47w44" class="article-share-link">Share</a>
       
-        <a href="http://blog.xuguruogu.com/2017/03/23/Linux系统调用列表-收藏/#disqus_thread" class="article-comment-link">Kommentare</a>
+        <a href="http://blog.xuguruogu.com/2017/03/23/Linux系统调用列表-收藏/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -1621,9 +1675,9 @@ CPU 2    0100         4
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.xuguruogu.com/2017/03/19/linux路由分析mtr命令/" data-id="cj0w58i8l000849s67ikx2ue7" class="article-share-link">Teilen</a>
+      <a data-url="http://blog.xuguruogu.com/2017/03/19/linux路由分析mtr命令/" data-id="cj11h2bey0007c0s6e5rqjska" class="article-share-link">Share</a>
       
-        <a href="http://blog.xuguruogu.com/2017/03/19/linux路由分析mtr命令/#disqus_thread" class="article-comment-link">Kommentare</a>
+        <a href="http://blog.xuguruogu.com/2017/03/19/linux路由分析mtr命令/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -1648,7 +1702,7 @@ CPU 2    0100         4
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpu/">cpu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpu/">cpu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a></li></ul>
     </div>
   </div>
 
@@ -1658,16 +1712,16 @@ CPU 2    0100         4
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a>
+      <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
     </div>
   </div>
 
@@ -1675,9 +1729,13 @@ CPU 2    0100         4
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/03/proc-buddyinfo理解/">/proc/buddyinfo理解</a>
+          </li>
         
           <li>
             <a href="/2017/03/30/查看系统硬件信息/">查看系统硬件信息</a>
@@ -1693,10 +1751,6 @@ CPU 2    0100         4
         
           <li>
             <a href="/2017/03/30/proc-irq-number-smp-affinity/">/proc/irq/{number}/smp_affinity</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/30/cpu含义/">cpu含义</a>
           </li>
         
       </ul>
