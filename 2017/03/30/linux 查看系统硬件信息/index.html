@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux 查看系统硬件信息 | kent每天都要进步</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="cpulscpu命令，查看的是cpu的统计信息.
+  Architecture:          x86_64          #cpu架构  CPU op-mode(s):        32-bit, 64-bit  Byte Order:            Little Endian   #小尾序  CPU(s):                48              #总">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 查看系统硬件信息">
+<meta property="og:url" content="http://blog.xuguruogu.com/2017/03/30/linux 查看系统硬件信息/index.html">
+<meta property="og:site_name" content="kent每天都要进步">
+<meta property="og:description" content="cpulscpu命令，查看的是cpu的统计信息.
+  Architecture:          x86_64          #cpu架构  CPU op-mode(s):        32-bit, 64-bit  Byte Order:            Little Endian   #小尾序  CPU(s):                48              #总">
+<meta property="og:updated_time" content="2017-04-11T02:04:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux 查看系统硬件信息">
+<meta name="twitter:description" content="cpulscpu命令，查看的是cpu的统计信息.
+  Architecture:          x86_64          #cpu架构  CPU op-mode(s):        32-bit, 64-bit  Byte Order:            Little Endian   #小尾序  CPU(s):                48              #总">
+  
+    <link rel="alternate" href="/atom.xml" title="kent每天都要进步" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kent每天都要进步</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">ITer的觉悟</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xuguruogu.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux 查看系统硬件信息" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/30/linux 查看系统硬件信息/" class="article-date">
+  <time datetime="2017-03-30T08:12:49.000Z" itemprop="datePublished">2017-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux 查看系统硬件信息
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>cpu<br>lscpu命令，查看的是cpu的统计信息.</p>
+<p>  Architecture:          x86_64          #cpu架构<br>  CPU op-mode(s):        32-bit, 64-bit<br>  Byte Order:            Little Endian   #小尾序<br>  CPU(s):                48              #总共有48核<br>  On-line CPU(s) list:   0-47<br>  Thread(s) per core:    2               #每个cpu核，支持2个线程，即支持超线程<br>  Core(s) per socket:    12              #每个cpu，有12个核<br>  Socket(s):             2               #总共有2一个cpu<br>  NUMA node(s):          1               #没有开启MUMA<br>  Vendor ID:             GenuineIntel    #cpu产商 intel<br>  CPU family:            6<br>  Model:                 63<br>  Stepping:              2<br>  CPU MHz:               2294.719<br>  BogoMIPS:              4589.37<br>  Virtualization:        VT-x            #支持cpu虚拟化技术<br>  L1d cache:             32K<br>  L1i cache:             32K<br>  L2 cache:              256K<br>  L3 cache:              30720K<br>  NUMA node0 CPU(s):     0-47</p>
+</li>
+<li><p>磁盘<br>查看硬盘和分区分布</p>
+<h1 id="lsblk"><a href="#lsblk" class="headerlink" title="lsblk"></a>lsblk</h1><p>  NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT<br>  sda      8:0    0 278.5G  0 disk<br>  ├─sda1   8:1    0 953.7M  0 part /boot<br>  ├─sda2   8:2    0    54G  0 part /<br>  ├─sda3   8:3    0   7.5G  0 part<br>  ├─sda4   8:4    0 111.8G  0 part /tmp<br>  └─sda5   8:5    0 104.3G  0 part /var/log<br>  sdb      8:16   0   2.2T  0 disk<br>  └─sdb1   8:17   0   2.2T  0 part /home</p>
+</li>
+<li><p>网卡<br>查看网卡硬件信息</p>
+<h1 id="lspci-grep-i-‘eth’"><a href="#lspci-grep-i-‘eth’" class="headerlink" title="lspci | grep -i ‘eth’"></a>lspci | grep -i ‘eth’</h1><p>  02:00.0 Ethernet controller: Intel Corporation Ethernet Controller 10-Gigabit X540-AT2 (rev 01)<br>  02:00.1 Ethernet controller: Intel Corporation Ethernet Controller 10-Gigabit X540-AT2 (rev 01)</p>
+</li>
+</ul>
+<p>如果要查看某个网络接口的详细信息，例如eth0的详细参数和指标</p>
+<pre><code># ethtool eth0
+Settings for eth0:
+    Supported ports: [ TP ]
+    Supported link modes:   100baseT/Full 
+                            1000baseT/Full 
+                            10000baseT/Full #支持万兆全双工模式
+    Supported pause frame use: No
+    Supports auto-negotiation: Yes #支持自适应模式，一般都支持
+    Advertised link modes:  100baseT/Full 
+                            1000baseT/Full 
+                            10000baseT/Full 
+    Advertised pause frame use: No
+    Advertised auto-negotiation: Yes #默认使用自适应模式
+    Speed: 10000Mb/s #现在网卡的速度是10000Mb,网卡使用自适应模式
+    Duplex: Full  #全双工
+    Port: Twisted Pair
+    PHYAD: 0
+    Transceiver: external
+    Auto-negotiation: on
+    MDI-X: Unknown
+    Supports Wake-on: umbg
+    Wake-on: g
+    Current message level: 0x00000007 (7)
+                drv probe link
+    Link detected: yes #表示有网线连接，和路由是通的
+</code></pre><p>查看bios信息</p>
+<pre><code># dmidecode -t bios
+
+# dmidecode 2.12
+SMBIOS 2.8 present.
+
+Handle 0x001D, DMI type 0, 24 bytes
+BIOS Information
+    Vendor: Insyde Corp.
+    Version: 1.57
+    Release Date: 08/11/2015
+    Address: 0xE0000
+    Runtime Size: 128 kB
+    ROM Size: 16384 kB
+    Characteristics:
+        PCI is supported
+        BIOS is upgradeable
+        BIOS shadowing is allowed
+        Boot from CD is supported
+        Selectable boot is supported
+        EDD is supported
+        Japanese floppy for NEC 9800 1.2 MB is supported (int 13h)
+        Japanese floppy for Toshiba 1.2 MB is supported (int 13h)
+        5.25&quot;/360 kB floppy services are supported (int 13h)
+        5.25&quot;/1.2 MB floppy services are supported (int 13h)
+        3.5&quot;/720 kB floppy services are supported (int 13h)
+        3.5&quot;/2.88 MB floppy services are supported (int 13h)
+        8042 keyboard services are supported (int 9h)
+        CGA/mono video services are supported (int 10h)
+        ACPI is supported
+        USB legacy is supported
+        BIOS boot specification is supported
+        Targeted content distribution is supported
+        UEFI is supported
+    BIOS Revision: 1.0
+
+Handle 0x0026, DMI type 13, 22 bytes
+BIOS Language Information
+    Language Description Format: Long
+    Installable Languages: 2
+        en|US|iso8859-1
+        zh|CN|unicode
+    Currently Installed Language: en|US|iso8859-1
+</code></pre><p>dmidecode以一种可读的方式dump出机器的DMI(Desktop Management Interface)信息。这些信息包括了硬件以及BIOS，既可以得到当前的配置，也可以得到系统支持的最大配置，比如说支持的最大内存数等。</p>
+<p>如果要查看所有有用信息</p>
+<pre><code>dmidecode -q
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/linux 查看系统硬件信息/" data-id="cj1cwsgjg0005gms6v3m9k8o3" class="article-share-link">Teilen</a>
+      
+        <a href="http://blog.xuguruogu.com/2017/03/30/linux 查看系统硬件信息/#disqus_thread" class="article-comment-link">Kommentare</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/03/proc-buddyinfo理解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          /proc/buddyinfo理解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/30/mpstat命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">linux性能测试 mpstat命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpu/">cpu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/cpu/" style="font-size: 10px;">cpu</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/11/linux sync、fsync与fdatasync/">linux sync、fsync与fdatasync</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/03/proc-buddyinfo理解/">/proc/buddyinfo理解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/linux 查看系统硬件信息/">linux 查看系统硬件信息</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/mpstat命令/">linux性能测试 mpstat命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/30/网卡队列RSS-RPS-RFS/">网卡队列RSS/RPS/RFS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kent<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'blog-xuguruogu-com';
+  
+  var disqus_url = 'http://blog.xuguruogu.com/2017/03/30/linux 查看系统硬件信息/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

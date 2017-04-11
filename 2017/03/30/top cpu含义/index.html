@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: memory | kent每天都要进步</title>
+  <title>top cpu含义 | kent每天都要进步</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="勿在浮沙筑高台">
-<meta property="og:type" content="website">
-<meta property="og:title" content="kent每天都要进步">
-<meta property="og:url" content="http://blog.xuguruogu.com/tags/memory/index.html">
+  <meta name="description" content="使用系统命令top即可看到如下类似信息：
+Cpu(s):  0.0%us,  0.5%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: is meaning of” nice CPU time">
+<meta property="og:type" content="article">
+<meta property="og:title" content="top cpu含义">
+<meta property="og:url" content="http://blog.xuguruogu.com/2017/03/30/top cpu含义/index.html">
 <meta property="og:site_name" content="kent每天都要进步">
-<meta property="og:description" content="勿在浮沙筑高台">
+<meta property="og:description" content="使用系统命令top即可看到如下类似信息：
+Cpu(s):  0.0%us,  0.5%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: is meaning of” nice CPU time">
+<meta property="og:updated_time" content="2017-04-11T02:04:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kent每天都要进步">
-<meta name="twitter:description" content="勿在浮沙筑高台">
+<meta name="twitter:title" content="top cpu含义">
+<meta name="twitter:description" content="使用系统命令top即可看到如下类似信息：
+Cpu(s):  0.0%us,  0.5%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+us: is meaning of “user CPU time”sy: is meaning of “system CPU time”ni: is meaning of” nice CPU time">
   
     <link rel="alternate" href="/atom.xml" title="kent每天都要进步" type="application/atom+xml">
   
@@ -64,41 +71,75 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/03/proc-buddyinfo理解/" class="archive-article-date">
-  <time datetime="2017-04-03T01:43:04.000Z" itemprop="datePublished">Apr 3</time>
+        <section id="main"><article id="post-top cpu含义" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/30/top cpu含义/" class="article-date">
+  <time datetime="2017-03-30T05:52:25.000Z" itemprop="datePublished">2017-03-30</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/03/proc-buddyinfo理解/">/proc/buddyinfo理解</a>
+    <h1 class="article-title" itemprop="name">
+      top cpu含义
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用系统命令top即可看到如下类似信息：</p>
+<p>Cpu(s):  0.0%us,  0.5%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</p>
+<p>us: is meaning of “user CPU time”<br>sy: is meaning of “system CPU time”<br>ni: is meaning of” nice CPU time”<br>id: is meaning of “idle”<br>wa: is meaning of “iowait”<br>hi：is meaning of “hardware irq”<br>si : is meaning of “software irq”<br>st : is meaning of “steal time”</p>
+<p>us 用户空间占用CPU百分比<br>sy 内核空间占用CPU百分比<br>ni 用户进程空间内改变过优先级的进程占用CPU百分比<br>id 空闲CPU百分比<br>wa 等待输入输出的CPU时间百分比<br>hi 硬件中断<br>si 软件中断<br>st: 实时</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.xuguruogu.com/2017/03/30/top cpu含义/" data-id="cj1cwsgjz000cgms6hq04usbl" class="article-share-link">Teilen</a>
+      
+        <a href="http://blog.xuguruogu.com/2017/03/30/top cpu含义/#disqus_thread" class="article-comment-link">Kommentare</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/30/proc-irq-number-smp-affinity/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          /proc/irq/{number}/smp_affinity
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/30/linux下cpu物理个数、多核、超线程判断解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">linux下cpu物理个数、多核、超线程判断解析</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
 </section>
         
           <aside id="sidebar">
@@ -190,11 +231,13 @@
 <script>
   var disqus_shortname = 'blog-xuguruogu-com';
   
+  var disqus_url = 'http://blog.xuguruogu.com/2017/03/30/top cpu含义/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
